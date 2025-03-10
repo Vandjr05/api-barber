@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0 # Imagem oficial do MySQL 8
+    container_name: barber-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root # Senha do usurio root (opcional)
+      - MYSQL_DATABASE=barber # Nome do banco de dados
+      - MYSQL_USER=barber # Usurio do banco
+      - MYSQL_PASSWORD=barber # Senha do usurio
+    ports:
+      - "3308:3306" # Mapeia a porta 3308 do host para a 3306 do container
+    volumes:
+      - db-data:/var/lib/mysql # Volume para persistncia dos dados
+    command: --default-authentication-plugin=mysql_native_password # Compatibilidade com drivers
+
+volumes:
+  db-data: # Define o volume para persistir os dados do MySQL
